@@ -1,0 +1,28 @@
+.user-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user-card {
+    margin-top: 30px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 25px;
+
+    .card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .user-detail-link {
+            text-decoration: none;
+            color: #007fff;
+        }
+    }
+
+    th {
+        text-align: left;
+        padding-right: 10px;
+    }
+}

@@ -1,0 +1,35 @@
+body {
+    background-color: aliceblue;
+    color: black;
+    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard Variable", Pretendard, Roboto,
+        "Noto Sans KR", "Segoe UI", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    margin: 0px;
+    min-height: 100vh;
+    overflow-x: hidden;
+}
+
+#app {
+    font-family: 'Pretendard Variable' !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    white-space: pre-line !important;
+}
+
+main {
+    section {
+        padding: 30px;
+        max-width: 1200px;
+        width: 100%;
+        margin: 0px auto;
+    }
+}
+
+th,
+td {
+    padding: 10px;
+}
+
+a {
+    text-decoration: none !important;
+}
