@@ -1,6 +1,6 @@
-import React, { useState, useEffect, ChangeEvent } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
-import { Box, Button, Typography, Modal, TextField } from '@mui/material';
+import { Box, Button, Typography, Modal, TextField, Divider } from '@mui/material';
 
 interface AddUserProps {
     isOpen: boolean;
@@ -76,23 +76,9 @@ function AddUser({ isOpen, onClose }: AddUserProps) {
         }));
     };
 
-    const validateForm = () => {
-        const { name, username, email, address, phone, website, company } = userData;
-        const { street, suite, city, zipcode } = address;
-        return name && username && email && street && suite && city && zipcode && phone && website && company.name && company.catchPhrase && company.bs;
-    };
-
-    // Update validity state when form changes
-    const [isValid, setIsValid] = useState(false);
-
-    useEffect(() => {
-        setIsValid(validateForm());
-    }, [userData]);
-
     const handleSubmit = async () => {
         try {
-            const response = await axios.post<UserData>('http://localhost:3001/user', userData);
-            window.onload
+            const response = await axios.post('http://localhost:3001/user', userData);
             console.log('User added:', response.data);
             onClose();
         } catch (error) {
@@ -103,50 +89,134 @@ function AddUser({ isOpen, onClose }: AddUserProps) {
     return (
         <Modal open={isOpen} onClose={onClose}>
             <Box sx={{ position: 'absolute', top: '50%', left: '50%', transform: 'translate(-50%, -50%)', bgcolor: 'background.paper', boxShadow: 24, p: 4 }}>
-                <Typography variant="h5" gutterBottom>
+                <Typography variant="h5">
                     새 사용자 추가
                 </Typography>
-                {['name', 'username', 'email', 'phone', 'website'].map((field) => (
-                    <TextField
-                        key={field}
-                        name={field}
-                        label={field.charAt(0).toUpperCase() + field.slice(1)}
-                        onChange={handleInputChange}
-                        fullWidth
-                        margin="normal"
-                        required
-                    />
-                ))}
-                <Typography variant="h6" gutterBottom>
+                <Divider sx={{marginTop:'20px', marginBottom:'20px'}}/>
+                <Typography variant="h6">
+                    User Info
+                </Typography>
+                <TextField
+                    name="name"
+                    label="Name"
+                    value={userData.name}
+                    onChange={handleInputChange}
+                    fullWidth
+                    margin="normal"
+                    required
+                />
+                <TextField
+                    name="username"
+                    label="Username"
+                    value={userData.username}
+                    onChange={handleInputChange}
+                    fullWidth
+                    margin="normal"
+                    required
+                />
+                <TextField
+                    name="email"
+                    label="Email"
+                    value={userData.email}
+                    onChange={handleInputChange}
+                    fullWidth
+                    margin="normal"
+                    required
+                />
+                                <Divider sx={{marginTop:'20px', marginBottom:'20px'}}/>
+                <Typography variant="h6">
                     Address
                 </Typography>
-                {['street', 'suite', 'city', 'zipcode'].map((field) => (
-                    <TextField
-                        key={field}
-                        name={field}
-                        label={field.charAt(0).toUpperCase() + field.slice(1)}
-                        onChange={handleAddressChange}
-                        fullWidth
-                        margin="normal"
-                        required
-                    />
-                ))}
-                <Typography variant="h6" gutterBottom>
+                <TextField
+                    name="street"
+                    label="Street"
+                    value={userData.address.street}
+                    onChange={handleAddressChange}
+                    fullWidth
+                    margin="normal"
+                    required
+                />
+                <TextField
+                    name="suite"
+                    label="Suite"
+                    value={userData.address.suite}
+                    onChange={handleAddressChange}
+                    fullWidth
+                    margin="normal"
+                    required
+                />
+                <TextField
+                    name="city"
+                    label="City"
+                    value={userData.address.city}
+                    onChange={handleAddressChange}
+                    fullWidth
+                    margin="normal"
+                    required
+                />
+                <TextField
+                    name="zipcode"
+                    label="Zipcode"
+                    value={userData.address.zipcode}
+                    onChange={handleAddressChange}
+                    fullWidth
+                    margin="normal"
+                    required
+                />
+                <TextField
+                    name="phone"
+                    label="Phone"
+                    value={userData.phone}
+                    onChange={handleInputChange}
+                    fullWidth
+                    margin="normal"
+                    required
+                />
+                <TextField
+                    name="website"
+                    label="Website"
+                    value={userData.website}
+                    onChange={handleInputChange}
+                    fullWidth
+                    margin="normal"
+                    required
+                />
+                                <Divider sx={{marginTop:'20px', marginBottom:'20px'}}/>
+                <Typography variant="h6">
                     Company
                 </Typography>
-                {['name', 'catchPhrase', 'bs'].map((field) => (
-                    <TextField
-                        key={field}
-                        name={field}
-                        label={field.charAt(0).toUpperCase() + field.slice(1)}
-                        onChange={handleCompanyChange}
-                        fullWidth
-                        margin="normal"
-                        required
-                    />
-                ))}
-                <Button onClick={handleSubmit} disabled={!isValid}>추가</Button>
-                <Button onClick={onClose}>취소</Button>
+                <TextField
+                    name="companyName"
+                    label="Company Name"
+                    value={userData.company.name}
+                    onChange={handleCompanyChange}
+                    fullWidth
+                    margin="normal"
+                    required
+                />
+                <TextField
+                    name="catchPhrase"
+                    label="Catch Phrase"
+                    value={userData.company.catchPhrase}
+                    onChange={handleCompanyChange}
+                    fullWidth
+                    margin="normal"
+                    required
+                />
+                <TextField
+                    name="bs"
+                    label="BS"
+                    value={userData.company.bs}
+                    onChange={handleCompanyChange}
+                    fullWidth
+                    margin="normal"
+                    required
+                />
+                <Divider sx={{marginTop:'20px', marginBottom:'20px'}}/>
+                <div style={{display:'flex', justifyContent:'center'}}>
+                <Button variant='outlined' onClick={handleSubmit}>추가</Button>
+                <Button variant='outlined' onClick={onClose}>취소</Button>
+                </div>
             </Box>
         </Modal>
     );

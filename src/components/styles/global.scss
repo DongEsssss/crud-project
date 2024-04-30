@@ -1,35 +1,48 @@
+html,
 body {
-    background-color: aliceblue;
-    color: black;
-    font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard Variable", Pretendard, Roboto,
-        "Noto Sans KR", "Segoe UI", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
-    margin: 0px;
-    min-height: 100vh;
-    overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+  color: black;
+  font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo",
+    "Pretendard Variable", Pretendard, Roboto, "Noto Sans KR", "Segoe UI",
+    "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+    sans-serif;
 }
 
 #app {
-    font-family: 'Pretendard Variable' !important;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
-    white-space: pre-line !important;
+  min-height: 100vh; /* 최소한의 높이 설정 */
+  position: relative;
+  background-color: rgb(230, 230, 230);
 }
 
 main {
-    section {
-        padding: 30px;
-        max-width: 1200px;
-        width: 100%;
-        margin: 0px auto;
-    }
+  flex-grow: 1; /* 나머지 공간을 채우도록 설정 */
+  padding-bottom: 60px; /* footer와 겹치지 않도록 여분의 공간을 추가 */
+}
+
+section {
+  padding: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
 }
 
 th,
 td {
-    padding: 10px;
+  padding: 10px;
 }
 
 a {
-    text-decoration: none !important;
+  text-decoration: none !important;
+}
+
+footer {
+  height: 60px;
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+  border-top: 1px solid black;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
 }

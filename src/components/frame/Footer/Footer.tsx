@@ -1,14 +1,12 @@
-import { Box } from '@mui/material'
-import './footer.scss'
+import React, { useEffect } from "react";
+import "./footer.scss";
 
-function Footer() {
-    return (
-        <footer className="footer-box">
-            <Box className='box'>
-                <h4>@Made - Dong</h4>
-            </Box>
-        </footer>
-    )
-}
+const Footer = () => {
+  return (
+    <footer>
+      <h4>@Made - Dong</h4>
+    </footer>
+  );
+};
 
-export default Footer
+export default Footer;

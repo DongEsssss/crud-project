@@ -1,10 +1,10 @@
 .header-box {
-    width: 100%;
-    background-color: white;
-
-    .box {
-        max-width: 1200px;
-        padding: 10px 30px;
-        margin: 0px auto;
-    }
+  width: 100%;
+  background-color: white;
+  border-bottom: 1px solid black;
+  .box {
+    max-width: 1200px;
+    padding: 10px 30px;
+    margin: 0px auto;
+  }
 }
