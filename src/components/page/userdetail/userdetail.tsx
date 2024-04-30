@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { Box, Button, Divider, Modal, Typography } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import Edituser from "../EditUser/edituser";
+import Edituser from "../EditUser/edituser";
 import { Users } from "../../feature/user/apislice";
 
 const UserDetail = () => {
@@ -27,7 +27,7 @@ const UserDetail = () => {
         const response = await axios.get(`http://localhost:3001/user/${id}`);
         setUser(response.data); // 단일 사용자 객체로 설정
       } catch (error) {
-        console.error("Error fetching user detail:", error);
+        console.error("데이터 가져오기 실패!", error);
       }
     };
 
