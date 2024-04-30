@@ -86,11 +86,11 @@ function AddUser({ isOpen, onClose }: AddUserProps) {
   const handleSubmit = async () => {
     try {
       const response = await axios.post("http://localhost:3001/user", userData);
-      console.log("User added:", response.data);
+      console.log("데이터 추가 성공!", response.data);
       window.location.reload();
       onClose();
     } catch (error) {
-      console.error("Error adding user:", error);
+      console.error("데이터 추가 실패!", error);
     }
   };
 
@@ -109,9 +109,8 @@ function AddUser({ isOpen, onClose }: AddUserProps) {
           top: "10%",
           left: "50%",
           transform: "translate(-50%, 00%)",
-          bgcolor: "background.paper",
-          boxShadow: 24,
-          p: 4,
+          bgcolor: "white",
+          padding: "20px",
         }}
       >
         <Typography variant="h5">새 사용자 추가</Typography>

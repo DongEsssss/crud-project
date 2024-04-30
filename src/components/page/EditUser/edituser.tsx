@@ -95,7 +95,7 @@ function Edituser({ isOpen, onClose }: AddUserProps) {
         const response = await axios.get(`http://localhost:3001/user/${id}`);
         setUserData(response.data); // API로부터 받아온 사용자 정보를 userData 상태에 설정
       } catch (error) {
-        console.error("Error fetching user data:", error);
+        console.error("데이터 매칭 실패!", error);
       }
     };
 
@@ -115,9 +115,8 @@ function Edituser({ isOpen, onClose }: AddUserProps) {
           top: "10%",
           left: "50%",
           transform: "translate(-50%, 00%)",
-          bgcolor: "background.paper",
-          boxShadow: 24,
-          p: 4,
+          bgcolor: "white",
+          padding: "20px",
         }}
       >
         <Typography variant="h5">기존 유저 수정</Typography>
