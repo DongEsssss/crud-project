@@ -1,13 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
-import { Box, Button, Divider } from "@mui/material";
+import { Box, Button, Divider, Modal, Typography } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
+import Edituser from "../user/\bEditUser/edituser";
+import { Users } from "../../feature/user/apislice";
 
 const UserDetail = () => {
   const { id } = useParams(); // URL에서 파라미터 값 추출
   const [user, setUser] = useState<Users | null>(null);
   const navigate = useNavigate();
+  //edit-modal
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
+  // 모달 열기
+  const openModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
 
   useEffect(() => {
     const fetchUserDetail = async () => {
@@ -41,6 +53,7 @@ const UserDetail = () => {
       console.error("유저 삭제 실패", error);
     }
   };
+
   return (
     <main>
       <section>
@@ -68,17 +81,18 @@ const UserDetail = () => {
             style={{ display: "grid", gridTemplateColumns: "repeat(2,1fr)" }}
           >
             <table>
+              <Typography variant="h6">유저 정보</Typography>
               <tbody>
                 <tr>
                   <th>ID</th>
                   <td>{user.id}</td>
                 </tr>
                 <tr>
-                  <th>Name</th>
+                  <th>이름</th>
                   <td>{user.name}</td>
                 </tr>
                 <tr>
-                  <th>Username</th>
+                  <th>유저 이름</th>
                   <td>{user.username}</td>
                 </tr>
                 <tr>
@@ -86,11 +100,11 @@ const UserDetail = () => {
                   <td>{user.email}</td>
                 </tr>
                 <tr>
-                  <th>Phone</th>
+                  <th>전화번호</th>
                   <td>{user.phone}</td>
                 </tr>
                 <tr>
-                  <th>Website</th>
+                  <th>홈페이지</th>
                   <td>
                     <a href="#">{user.website}</a>
                   </td>
@@ -98,36 +112,61 @@ const UserDetail = () => {
               </tbody>
             </table>
             <table>
+              <Typography variant="h6">주소</Typography>
               <tbody>
                 <tr>
-                  <th>Address</th>
-                  <td>
-                    <p>Street: {user.address?.street}</p>
-                    <p>Suite: {user.address?.suite}</p>
-                    <p>City: {user.address?.city}</p>
-                    <p>Zipcode: {user.address?.zipcode}</p>
-                  </td>
+                  <th>도시 이름</th>
+                  <td>{user.address?.city}</td>
                 </tr>
                 <tr>
-                  <th>Company</th>
-                  <td>
-                    <p>Name: {user.company?.name}</p>
-                    <p>Catch Phrase: {user.company?.catchPhrase}</p>
-                    <p>Business: {user.company?.bs}</p>
-                  </td>
+                  <th>도로 이름</th>
+                  <td> {user.address?.street}</td>
+                </tr>
+                <tr>
+                  <th>상세 주소</th>
+                  <td>{user.address?.suite}</td>
+                </tr>
+                <tr>
+                  <th>우편 번호</th>
+                  <td>{user.address?.zipcode}</td>
+                </tr>
+                <Typography variant="h6">회사 주소</Typography>
+                <tr>
+                  <th>회사 이름</th>
+                  <td>{user.company?.name}</td>
+                </tr>
+                <tr>
+                  <th>회사 한 줄 소개</th>
+                  <td>{user.company?.catchPhrase}</td>
+                </tr>
+                <tr>
+                  <th>직업</th>
+                  <td>{user.company?.bs}</td>
                 </tr>
               </tbody>
             </table>
           </div>
         </div>
         <Divider sx={{ marginTop: "20px", marginBottom: "20px" }} />
-        <Button
-          sx={{ backgroundColor: "red", color: "white" }}
-          onClick={userdelete}
-        >
-          삭제
-        </Button>
+        <div style={{ display: "flex", justifyContent: "flex-end" }}>
+          <Button
+            sx={{ backgroundColor: "blue", color: "white" }}
+            onClick={openModal}
+          >
+            수정
+          </Button>
+          <Button
+            sx={{ backgroundColor: "red", color: "white", marginLeft: "10px" }}
+            onClick={userdelete}
+          >
+            삭제
+          </Button>
+        </div>
       </section>
+      {/* 모달 */}
+      <Modal open={isModalOpen}>
+        <Edituser isOpen={isModalOpen} onClose={closeModal} />
+      </Modal>
     </main>
   );
 };

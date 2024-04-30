@@ -1,27 +1,23 @@
 {
   "user": [
     {
-      "id": 1,
-      "name": "Leanne Graham",
-      "username": "Bret",
-      "email": "Sincere@april.biz",
+      "name": "바꿈",
+      "username": "바꿈",
+      "email": "바꿈",
       "address": {
-        "street": "Kulas Light",
-        "suite": "Apt. 556",
-        "city": "Gwenborough",
-        "zipcode": "92998-3874",
-        "geo": {
-          "lat": "-37.3159",
-          "lng": "81.1496"
-        }
+        "street": "바꿈",
+        "suite": "바꿈",
+        "city": "바꿈",
+        "zipcode": "바꿈"
       },
-      "phone": "1-770-736-8031 x56442",
-      "website": "hildegard.org",
+      "phone": "이것만 바꿈",
+      "website": "바꿈",
       "company": {
-        "name": "Romaguera-Crona",
-        "catchPhrase": "Multi-layered client-server neural-net",
-        "bs": "harness real-time e-markets"
-      }
+        "name": "바꿈",
+        "catchPhrase": "바꿈",
+        "bs": "바꿈"
+      },
+      "id": 1
     },
     {
       "id": 2,
@@ -229,51 +225,6 @@
         "catchPhrase": "Centralized empowering task-force",
         "bs": "target end-to-end models"
       }
-    },
-    {
-      "name": "123",
-      "username": "123",
-      "email": "123",
-      "id": 11
-    },
-    {
-      "name": "test",
-      "username": "test",
-      "email": "test",
-      "address": {
-        "street": "test",
-        "suite": "test",
-        "city": "test",
-        "zipcode": "test"
-      },
-      "phone": "test",
-      "website": "test",
-      "company": {
-        "name": "",
-        "catchPhrase": "test",
-        "bs": "test",
-        "companyName": "test"
-      },
-      "id": 13
-    },
-    {
-      "name": "test1",
-      "username": "test1",
-      "email": "test1",
-      "address": {
-        "street": "test1",
-        "suite": "test1",
-        "city": "test1",
-        "zipcode": "test1"
-      },
-      "phone": "test1",
-      "website": "test1",
-      "company": {
-        "name": "test1",
-        "catchPhrase": "test1",
-        "bs": "test1"
-      },
-      "id": 16
     }
   ]
 }

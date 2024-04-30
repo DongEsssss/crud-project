@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import {
   Box,
@@ -8,33 +8,16 @@ import {
   TextField,
   Divider,
 } from "@mui/material";
+import { useParams } from "react-router-dom";
+import { Users } from "../../../feature/user/apislice";
 
 interface AddUserProps {
   isOpen: boolean;
   onClose: () => void;
 }
 
-interface UserData {
-  name: string;
-  username: string;
-  email: string;
-  address: {
-    street: string;
-    suite: string;
-    city: string;
-    zipcode: string;
-  };
-  phone: string;
-  website: string;
-  company: {
-    name: string;
-    catchPhrase: string;
-    bs: string;
-  };
-}
-
-function AddUser({ isOpen, onClose }: AddUserProps) {
-  const [userData, setUserData] = useState<UserData>({
+function Edituser({ isOpen, onClose }: AddUserProps) {
+  const [userData, setUserData] = useState<Users>({
     name: "",
     username: "",
     email: "",
@@ -52,6 +35,8 @@ function AddUser({ isOpen, onClose }: AddUserProps) {
       bs: "",
     },
   });
+
+  const { id } = useParams(); // URL에서 파라미터 값 추출
 
   const handleInputChange = (e: any) => {
     const { name, value } = e.target;
@@ -85,12 +70,15 @@ function AddUser({ isOpen, onClose }: AddUserProps) {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post("http://localhost:3001/user", userData);
-      console.log("User added:", response.data);
+      const response = await axios.put(
+        `http://localhost:3001/user/${id}`,
+        userData
+      );
+      console.log("유저 수정 완료", response.data);
       window.location.reload();
       onClose();
     } catch (error) {
-      console.error("Error adding user:", error);
+      console.error("유저 수정 실패", error);
     }
   };
 
@@ -100,6 +88,24 @@ function AddUser({ isOpen, onClose }: AddUserProps) {
       (typeof value === "object" &&
         Object.values(value).some((innerValue) => innerValue === ""))
   );
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3001/user/${id}`);
+        setUserData(response.data); // API로부터 받아온 사용자 정보를 userData 상태에 설정
+      } catch (error) {
+        console.error("Error fetching user data:", error);
+      }
+    };
+
+    fetchUserData(); // 함수 호출
+  }, [id]); // id가 변경될 때마다 다시 호출
+
+  // 사용자 정보가 로드되지 않았을 경우 처리
+  if (!userData) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <Modal open={isOpen} onClose={onClose} sx={{ overflow: "scroll" }}>
@@ -114,7 +120,7 @@ function AddUser({ isOpen, onClose }: AddUserProps) {
           p: 4,
         }}
       >
-        <Typography variant="h5">새 사용자 추가</Typography>
+        <Typography variant="h5">기존 유저 수정</Typography>
         <Divider sx={{ marginTop: "20px", marginBottom: "20px" }} />
         <Typography variant="h6">유저 정보</Typography>
         <TextField
@@ -149,7 +155,7 @@ function AddUser({ isOpen, onClose }: AddUserProps) {
         <TextField
           name="street"
           label="거리 이름을 입력주세요."
-          value={userData.address.street}
+          value={userData.address?.street}
           onChange={handleAddressChange}
           fullWidth
           margin="normal"
@@ -158,7 +164,7 @@ function AddUser({ isOpen, onClose }: AddUserProps) {
         <TextField
           name="suite"
           label="상세 주소를 입력해주세요."
-          value={userData.address.suite}
+          value={userData.address?.suite}
           onChange={handleAddressChange}
           fullWidth
           margin="normal"
@@ -167,7 +173,7 @@ function AddUser({ isOpen, onClose }: AddUserProps) {
         <TextField
           name="city"
           label="도시 이름을 입력해주세요."
-          value={userData.address.city}
+          value={userData.address?.city}
           onChange={handleAddressChange}
           fullWidth
           margin="normal"
@@ -176,7 +182,7 @@ function AddUser({ isOpen, onClose }: AddUserProps) {
         <TextField
           name="zipcode"
           label="우편번호를 입력해주세요."
-          value={userData.address.zipcode}
+          value={userData.address?.zipcode}
           onChange={handleAddressChange}
           fullWidth
           margin="normal"
@@ -204,7 +210,7 @@ function AddUser({ isOpen, onClose }: AddUserProps) {
         <Typography variant="h6">회사 정보</Typography>
         <TextField
           name="name"
-          value={userData.company.name}
+          value={userData.company?.name}
           label="회사 이름을 입력주세요."
           onChange={handleCompanyChange}
           fullWidth
@@ -214,7 +220,7 @@ function AddUser({ isOpen, onClose }: AddUserProps) {
         <TextField
           name="catchPhrase"
           label="회사 한 줄 소개"
-          value={userData.company.catchPhrase}
+          value={userData.company?.catchPhrase}
           onChange={handleCompanyChange}
           fullWidth
           margin="normal"
@@ -223,7 +229,7 @@ function AddUser({ isOpen, onClose }: AddUserProps) {
         <TextField
           name="bs"
           label="직업을 입력해주세요."
-          value={userData.company.bs}
+          value={userData.company?.bs}
           onChange={handleCompanyChange}
           fullWidth
           margin="normal"
@@ -236,7 +242,7 @@ function AddUser({ isOpen, onClose }: AddUserProps) {
             onClick={handleSubmit}
             disabled={isButtonDisabled}
           >
-            추가
+            수정
           </Button>
           <Button
             variant="outlined"
@@ -251,4 +257,4 @@ function AddUser({ isOpen, onClose }: AddUserProps) {
   );
 }
 
-export default AddUser;
+export default Edituser;

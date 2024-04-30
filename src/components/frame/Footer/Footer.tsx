@@ -1,6 +1,4 @@
-import React, { useEffect } from "react";
-import "./footer.scss";
-
+import React from "react";
 const Footer = () => {
   return (
     <footer>
