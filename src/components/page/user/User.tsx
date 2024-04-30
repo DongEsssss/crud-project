@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { Link, useNavigate } from "react-router-dom";
 import "./user.scss";
-import Adduser from "./AddUser/adduser";
+import Adduser from "../AddUser/adduser";
 import { Users } from "../../feature/user/apislice";
 
 export default function User() {

@@ -9,7 +9,7 @@ import {
   Divider,
 } from "@mui/material";
 import { useParams } from "react-router-dom";
-import { Users } from "../../../feature/user/apislice";
+import { Users } from "../../feature/user/apislice";
 
 interface AddUserProps {
   isOpen: boolean;

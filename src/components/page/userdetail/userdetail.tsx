@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
 import { Box, Button, Divider, Modal, Typography } from "@mui/material";
 import AccountCircleIcon from "@mui/icons-material/AccountCircle";
-import Edituser from "../user/\bEditUser/edituser";
+import Edituser from "../EditUser/edituser";
 import { Users } from "../../feature/user/apislice";
 
 const UserDetail = () => {
