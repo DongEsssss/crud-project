@@ -7,7 +7,7 @@
 .user-card {
     margin-top: 30px;
     display: grid;
-    grid-template-columns: repeat(auto, 200px);
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 25px;
 
     .card-header {
